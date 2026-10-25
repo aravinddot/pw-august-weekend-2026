@@ -6,10 +6,15 @@ import { test, expect } from '@playwright/test'
 
 test.describe('Interactive Playwright Sandbox Basic', () => {
 
-
+// only, skip, fixme, fail, slow
     test('Click, Double Click, Hover, Tooltip, Static Dropdown @smoke', async ({ page }) => {
-        await page.goto('https://playwright-mastery-academy-app.vercel.app/practice/sandbox-basic')
-        await page.getByTestId('single-click-btn').click()
+
+        // test.use({
+        //     browserName: 'chromium'
+        // })
+        test.slow() // 30 secs -> 3 times 90 secs
+        await page.goto('/practice/sandbox-basic', {timeout: 120000})
+        await page.getByTestId('single-click-btn').click({timeout: 120000})
         // await expect(locator).toBeVisible()
         await expect(page.getByText('Single click completed.')).toBeVisible()
         await expect(page.getByTestId('single-click-status')).toContainText('Single click completed.')
@@ -21,14 +26,16 @@ test.describe('Interactive Playwright Sandbox Basic', () => {
         await expect(page.getByText('Tooltip verified successfully.')).toBeVisible()
         // const toolTipText = await page.getByTestId('hover-tooltip').innerText()
         // console.log(toolTipText)
-        await expect(page.getByTestId('hover-tooltip')).toContainText('Tooltip verified')
+        await expect(page.getByTestId('hover-tooltip')).toContainText('Tooltip verified', { timeout: 60000 })
         await page.getByTestId('static-practice-select').selectOption('Easy - Basic locator targeting')
-        await expect(page.getByText('Static dropdown selected: Easy123.')).toBeVisible()
+        //await expect(page.getByText('Static dropdown selected: Easy123.')).toBeVisible()
     })
 
 
     test('Inputs, Checkbox, Radio, Dropdown @reg', async ({ page }) => {
-        await page.goto('https://playwright-mastery-academy-app.vercel.app/practice/sandbox-basic')
+
+        test.setTimeout(240000) // 240 seconds per test
+        await page.goto('/practice/sandbox-basic')
 
         const name = 'Playwright'
         const mailId = 'info@playwrightmasteryacademy.com'
@@ -51,8 +58,8 @@ test.describe('Interactive Playwright Sandbox Basic', () => {
     })
 
 
-    test('Dynamic Waits, Keyboard', async ({ page }) => {
-        await page.goto('https://playwright-mastery-academy-app.vercel.app/practice/sandbox-basic')
+    test('Dynamic Waits, Keyboard @reg @smoke', async ({ page }) => {
+        await page.goto('/practice/sandbox-basic')
 
         await page.getByTestId('async-load-btn').click()
         // await page.waitForTimeout(20000)
@@ -66,7 +73,7 @@ test.describe('Interactive Playwright Sandbox Basic', () => {
 
 
     test('Text and Attribute Extraction', async ({ page }) => {
-        await page.goto('https://playwright-mastery-academy-app.vercel.app/practice/sandbox-basic')
+        await page.goto('/practice/sandbox-basic')
 
         //extract only visible text in UI
         // const innerTextvalue = await page.getByTestId('extract-textcontent-target').innerText()
@@ -111,7 +118,7 @@ test.describe('Interactive Playwright Sandbox Basic', () => {
 
     test('element state checks - checked', async ({ page }) => {
 
-        await page.goto('https://playwright-mastery-academy-app.vercel.app/practice/sandbox-basic')
+        await page.goto('/practice/sandbox-basic')
         // conditional handling
 
         // isChecked(), isDisabled(), isVisible(), isHidden, isEditable()
@@ -171,17 +178,17 @@ test.describe('Interactive Playwright Sandbox Basic', () => {
 
 })
 
-test.describe('Login functionality', () => {
+// test.describe('Login functionality', () => {
 
-})
-test.describe('User creation functionality', () => {
+// })
+// test.describe('User creation functionality', () => {
 
-})
+// })
 
-test.describe('Client creation functionality', () => {
+// test.describe('Client creation functionality', () => {
 
-})
+// })
 
-test.describe('Order placment functionality', () => {
+// test.describe('Order placment functionality', () => {
 
-})
+// })

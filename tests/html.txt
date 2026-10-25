@@ -1,0 +1,19 @@
+html
+head
+body
+header, footer, section - layout
+text tag: h1 - h6, p, span, div, br
+ul, ol, li
+link/media - a, img, iframe
+table, tr,th, td
+form-> input 
+button
+textarea
+label
+
+css, xpath, built in locator
+css=> tag, id, class, attribute
+[data-test="login-button"] => exact match
+[data-test*="login-"]=> contains
+[data-test^="login-"] => starts with
+[data-test$="button"] => ends with
